@@ -1,6 +1,19 @@
 import discord
 from discord.ext import commands
+import discord
+from discord.ext import commands
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # Carrega as variáveis do arquivo .env
+
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f"Bot conectado como {bot.user}")
+
+bot.run(TOKEN)
 
 intents = discord.Intents.default()
 intents.messages = True
