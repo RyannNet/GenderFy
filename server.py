@@ -1,26 +1,22 @@
 import discord
 from discord.ext import commands
-import discord
-from discord.ext import commands
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Carrega as variáveis do arquivo .env
+# Carregar as variáveis de ambiente do arquivo .env
+load_dotenv()
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+# Carregar o token do bot de forma segura
+TOKEN = os.getenv("DISCORD_TOKEN")
 
-@bot.event
-async def on_ready():
-    print(f"Bot conectado como {bot.user}")
-
-bot.run(TOKEN)
-
+# Definir intents do bot
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
 intents.guilds = True
 intents.members = True
 
+# Criar o bot com os intents definidos
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Lista de administradores permitidos
@@ -105,4 +101,5 @@ async def admins(ctx):
     admin_list = "\n".join([f"- {name}" for name in ADMINS.keys()])
     await ctx.send(f"**Administradores disponíveis:**\n{admin_list}")
 
+# Rodar o bot
 bot.run(TOKEN)
